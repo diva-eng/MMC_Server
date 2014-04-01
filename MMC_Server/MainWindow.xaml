@@ -8,9 +8,13 @@
 <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Resources.xaml" />
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
 </Window.Resources>
+	<Controls:MetroWindow.Background>
+		<ImageBrush ImageSource="geometry_@2X.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,412,412"/>
+	</Controls:MetroWindow.Background>
 <Controls:MetroWindow.WindowCommands>
   <Controls:WindowCommands>
     <Button Content="settings" Click="Toggle_Settings" />
@@ -21,8 +25,90 @@
 		<Controls:Flyout Header="Settings" Position="Right" Width="300" Theme="Dark">
 		<!-- Your custom content here -->
 		</Controls:Flyout>
+		<Controls:Flyout Header="Devices" Position="Right" Width="500" Theme="Accent">
+		<!-- Your custom content here -->
+		</Controls:Flyout>
 	</Controls:FlyoutsControl>
 </Controls:MetroWindow.Flyouts>
 <Grid>
+	<DockPanel x:Name="Status_Panel" HorizontalAlignment="Left" Height="30" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="772">
+		<Label Content="status:" Height="30" VerticalAlignment="Top" Width="45.097" Foreground="#FFC1C923"/>
+		<Label x:Name="lblServerStatus" Content="server started" Height="30" VerticalAlignment="Top" Background="#00000000" BorderThickness="0" Foreground="#FF00AAB5" Margin="3,0,0,0"/>
+		<Label Content="client status:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+		<Label x:Name="lblClientStatus" Content="no clients connected" Height="30" VerticalAlignment="Top" BorderThickness="3,0,0,0" Foreground="#FFF41C54"/>
+		<Label Content="character client:" Height="30" VerticalAlignment="Top" BorderThickness="0" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+		<Label x:Name="lblCharacterNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Background="#00000000" Foreground="#FFF41C54"/>
+		<Label Content="effects client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+		<Label x:Name="lblEffectsNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFF41C54"/>
+		<Label Content="lighting client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+		<Label x:Name="lblLightingNum" Content="0" Height="30" VerticalAlignment="Top" Background="#00000000" Foreground="#FFF41C54"/>
+		<Button Content="client list" Height="30" VerticalAlignment="Top" Width="75" Style="{DynamicResource SquareButtonStyle}" Click="Toggle_DeviceList" Margin="30,0,0,0"/>
+		
+	</DockPanel>
+	<Controls:MetroAnimatedSingleRowTabControl x:Name="tabMainControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Width="772">
+		<TabItem Header="Concert">
+			<Grid Background="#00F0F0F0">
+				<DockPanel HorizontalAlignment="Center" LastChildFill="False" VerticalAlignment="Top" Margin="0,100,0,0">
+					<Controls:Tile Title="concert" 
+						TiltFactor="2"
+						Width="100" Height="100" 
+						Count="start" Background="#CC00AAB5">
+					</Controls:Tile>
+					<Controls:Tile Title="concert" 
+						TiltFactor="2"
+						Width="100" Height="100" 
+						Count="pause" Background="#CCC1C923">
+					</Controls:Tile>
+					<Controls:Tile Title="concert" 
+						TiltFactor="2"
+						Width="100" Height="100" 
+						Count="stop" Background="#CCF41C54">
+					</Controls:Tile>
+				</DockPanel>
+			</Grid>
+		</TabItem>
+		<TabItem Header="Songlist" Margin="0">
+			<Grid Background="#00E5E5E5" Height="488.5">
+				<DockPanel HorizontalAlignment="Left" Height="30" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,5,0,0">
+					<Label Content="Songlist" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" FontWeight="Bold" FontSize="16"/>
+				</DockPanel>
+				<Grid HorizontalAlignment="Left" Height="443.5" VerticalAlignment="Top" Width="772" Margin="0,45,0,0">
+					<ListBox x:Name="lboxSongList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="0,0,-100,0" Background="#1900AAB5" Height="350">
+						<ListBoxItem Content="ListBoxItem"/>
+						<ListBoxItem Content="ListBoxItem"/>
+					</ListBox>
+					<DockPanel HorizontalAlignment="Left" Height="39.5" LastChildFill="False" VerticalAlignment="Top" Width="200" Margin="0,355,0,0">
+						<Button x:Name="btnAddSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0">
+							<Button.Background>
+								<ImageBrush ImageSource="appbar.add.png"/>
+							</Button.Background>
+						</Button>
+						<Button x:Name="btnRemoveSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="80,0,0,0">
+							<Button.Background>
+								<ImageBrush ImageSource="appbar.close.png"/>
+							</Button.Background>
+						</Button>
+					</DockPanel>
+					<DockPanel HorizontalAlignment="Left" Height="26" LastChildFill="False" VerticalAlignment="Top" Width="200" Margin="0,385.5,0,0">
+						<Label Content="add" Height="26" VerticalAlignment="Top" Margin="25,0,0,0"/>
+						<Label Content="remove" Height="26" VerticalAlignment="Top" Margin="80,0,0,0"/>
+					</DockPanel>
+				</Grid>
+			</Grid>
+		</TabItem>
+		<Controls:MetroTabItem Header="Characters">
+			<Grid Background="#FFE5E5E5"/>
+		</Controls:MetroTabItem>
+		<Controls:MetroTabItem Header="Effects">
+			<Grid Background="#FFE5E5E5"/>
+		</Controls:MetroTabItem>
+		<Controls:MetroTabItem Header="Lighting" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<Grid Background="#FFE5E5E5"/>
+		</Controls:MetroTabItem>
+		<Controls:MetroTabItem Header="Statistics">
+			<Grid Background="#FFE5E5E5"/>
+		</Controls:MetroTabItem>
+	</Controls:MetroAnimatedSingleRowTabControl>
+	<Rectangle Fill="#0C282828" HorizontalAlignment="Left" Height="570" Stroke="#00000000" VerticalAlignment="Top" Width="792" Panel.ZIndex="-1"/>
 </Grid>
 </Controls:MetroWindow>
