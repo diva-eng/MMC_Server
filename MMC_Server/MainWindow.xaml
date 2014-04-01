@@ -164,7 +164,7 @@
 									<ImageBrush ImageSource="appbar.close.png"/>
 								</Button.Background>
 							</Button>
-							<Button x:Name="btnSaveSongInfo1" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="539,0,0,-0.5">
+							<Button x:Name="btnSaveCharacterInfo" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="539,0,0,-0.5">
 								<Button.Background>
 									<ImageBrush ImageSource="appbar.disk.png"/>
 								</Button.Background>
