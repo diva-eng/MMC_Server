@@ -124,7 +124,10 @@
     </None>
     <AppDesigner Include="Properties\" />
     <Resource Include="appbar.add.png" />
+    <Resource Include="appbar.arrow.down.png" />
+    <Resource Include="appbar.arrow.up.png" />
     <Resource Include="appbar.close.png" />
+    <Resource Include="appbar.disk.png" />
     <Resource Include="geometry_%402X.png" />
     <Resource Include="miku.png" />
     <Resource Include="Resources\Entypo.ttf" />

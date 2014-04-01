@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace MMC_Server
 {
@@ -53,6 +54,11 @@ namespace MMC_Server
                 if (f != null)
                     f.IsOpen = false;
             }
+        }
+
+        private async void Toggle_Dialog(object sender, RoutedEventArgs e)
+        {
+            var result = await this.ShowInputAsync("please input song title.", "song title");
         }
     }
 }

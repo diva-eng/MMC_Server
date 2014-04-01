@@ -1,17 +1,18 @@
-﻿<Controls:MetroWindow x:Class="MMC_Server.MainWindow"
+﻿<Controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:MMC_Control"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Miku Miku Concert Server" Height="600" Width="800" Icon="miku.png" ResizeMode="CanResizeWithGrip">
-<Window.Resources>
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MMC_Server.MainWindow"
+        Title="Miku Miku Concert Server" Height="600" Width="800" Icon="miku.png" ResizeMode="CanResizeWithGrip" MinWidth="800" MinHeight="600">
+<Controls:MetroWindow.Resources>
 <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Resources.xaml" />
 		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
-</Window.Resources>
+</Controls:MetroWindow.Resources>
 	<Controls:MetroWindow.Background>
 		<ImageBrush ImageSource="geometry_@2X.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,412,412"/>
 	</Controls:MetroWindow.Background>
@@ -30,85 +31,175 @@
 		</Controls:Flyout>
 	</Controls:FlyoutsControl>
 </Controls:MetroWindow.Flyouts>
-<Grid>
-	<DockPanel x:Name="Status_Panel" HorizontalAlignment="Left" Height="30" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="772">
-		<Label Content="status:" Height="30" VerticalAlignment="Top" Width="45.097" Foreground="#FFC1C923"/>
-		<Label x:Name="lblServerStatus" Content="server started" Height="30" VerticalAlignment="Top" Background="#00000000" BorderThickness="0" Foreground="#FF00AAB5" Margin="3,0,0,0"/>
-		<Label Content="client status:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-		<Label x:Name="lblClientStatus" Content="no clients connected" Height="30" VerticalAlignment="Top" BorderThickness="3,0,0,0" Foreground="#FFF41C54"/>
-		<Label Content="character client:" Height="30" VerticalAlignment="Top" BorderThickness="0" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-		<Label x:Name="lblCharacterNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Background="#00000000" Foreground="#FFF41C54"/>
-		<Label Content="effects client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-		<Label x:Name="lblEffectsNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFF41C54"/>
-		<Label Content="lighting client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-		<Label x:Name="lblLightingNum" Content="0" Height="30" VerticalAlignment="Top" Background="#00000000" Foreground="#FFF41C54"/>
-		<Button Content="client list" Height="30" VerticalAlignment="Top" Width="75" Style="{DynamicResource SquareButtonStyle}" Click="Toggle_DeviceList" Margin="30,0,0,0"/>
+	<Grid>
+		<DockPanel x:Name="Status_Panel" HorizontalAlignment="Left" Height="30" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="772">
+			<Label Content="status:" Height="30" VerticalAlignment="Top" Width="45.097" Foreground="#FFC1C923"/>
+			<Label x:Name="lblServerStatus" Content="server started" Height="30" VerticalAlignment="Top" Background="#00000000" BorderThickness="0" Foreground="#FF00AAB5" Margin="3,0,0,0"/>
+			<Label Content="client status:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+			<Label x:Name="lblClientStatus" Content="no clients connected" Height="30" VerticalAlignment="Top" BorderThickness="3,0,0,0" Foreground="#FFF41C54"/>
+			<Label Content="character client:" Height="30" VerticalAlignment="Top" BorderThickness="0" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+			<Label x:Name="lblCharacterNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Background="#00000000" Foreground="#FFF41C54"/>
+			<Label Content="effects client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+			<Label x:Name="lblEffectsNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFF41C54"/>
+			<Label Content="lighting client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
+			<Label x:Name="lblLightingNum" Content="0" Height="30" VerticalAlignment="Top" Background="#00000000" Foreground="#FFF41C54"/>
+			<Button Content="client list" Height="30" VerticalAlignment="Top" Width="75" Style="{DynamicResource SquareButtonStyle}" Click="Toggle_DeviceList" Margin="30,0,0,0"/>
 		
-	</DockPanel>
-	<Controls:MetroAnimatedSingleRowTabControl x:Name="tabMainControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Width="772">
-		<TabItem Header="Concert">
-			<Grid Background="#00F0F0F0">
-				<DockPanel HorizontalAlignment="Center" LastChildFill="False" VerticalAlignment="Top" Margin="0,100,0,0">
-					<Controls:Tile Title="concert" 
-						TiltFactor="2"
-						Width="100" Height="100" 
-						Count="start" Background="#CC00AAB5">
-					</Controls:Tile>
-					<Controls:Tile Title="concert" 
-						TiltFactor="2"
-						Width="100" Height="100" 
-						Count="pause" Background="#CCC1C923">
-					</Controls:Tile>
-					<Controls:Tile Title="concert" 
-						TiltFactor="2"
-						Width="100" Height="100" 
-						Count="stop" Background="#CCF41C54">
-					</Controls:Tile>
-				</DockPanel>
-			</Grid>
-		</TabItem>
-		<TabItem Header="Songlist" Margin="0">
-			<Grid Background="#00E5E5E5" Height="488.5">
-				<DockPanel HorizontalAlignment="Left" Height="30" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,5,0,0">
-					<Label Content="Songlist" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" FontWeight="Bold" FontSize="16"/>
-				</DockPanel>
-				<Grid HorizontalAlignment="Left" Height="443.5" VerticalAlignment="Top" Width="772" Margin="0,45,0,0">
-					<ListBox x:Name="lboxSongList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="0,0,-100,0" Background="#1900AAB5" Height="350">
-						<ListBoxItem Content="ListBoxItem"/>
-						<ListBoxItem Content="ListBoxItem"/>
-					</ListBox>
-					<DockPanel HorizontalAlignment="Left" Height="39.5" LastChildFill="False" VerticalAlignment="Top" Width="200" Margin="0,355,0,0">
-						<Button x:Name="btnAddSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0">
-							<Button.Background>
-								<ImageBrush ImageSource="appbar.add.png"/>
-							</Button.Background>
-						</Button>
-						<Button x:Name="btnRemoveSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="80,0,0,0">
-							<Button.Background>
-								<ImageBrush ImageSource="appbar.close.png"/>
-							</Button.Background>
-						</Button>
-					</DockPanel>
-					<DockPanel HorizontalAlignment="Left" Height="26" LastChildFill="False" VerticalAlignment="Top" Width="200" Margin="0,385.5,0,0">
-						<Label Content="add" Height="26" VerticalAlignment="Top" Margin="25,0,0,0"/>
-						<Label Content="remove" Height="26" VerticalAlignment="Top" Margin="80,0,0,0"/>
+		</DockPanel>
+		<Controls:MetroAnimatedSingleRowTabControl x:Name="tabMainControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Width="772">
+			<TabItem Header="concert">
+				<Grid Background="#00F0F0F0">
+					<DockPanel HorizontalAlignment="Center" LastChildFill="False" VerticalAlignment="Top" Margin="0,100,0,0">
+						<Controls:Tile Title="concert" 
+							TiltFactor="2"
+							Width="100" Height="100" 
+							Count="start" Background="#CC00AAB5"/>
+						<Controls:Tile Title="concert" 
+							TiltFactor="2"
+							Width="100" Height="100" 
+							Count="pause" Background="#CCC1C923"/>
+						<Controls:Tile Title="concert" 
+							TiltFactor="2"
+							Width="100" Height="100" 
+							Count="stop" Background="#CCF41C54"/>
 					</DockPanel>
 				</Grid>
-			</Grid>
-		</TabItem>
-		<Controls:MetroTabItem Header="Characters">
-			<Grid Background="#FFE5E5E5"/>
-		</Controls:MetroTabItem>
-		<Controls:MetroTabItem Header="Effects">
-			<Grid Background="#FFE5E5E5"/>
-		</Controls:MetroTabItem>
-		<Controls:MetroTabItem Header="Lighting" HorizontalAlignment="Left" VerticalAlignment="Top">
-			<Grid Background="#FFE5E5E5"/>
-		</Controls:MetroTabItem>
-		<Controls:MetroTabItem Header="Statistics">
-			<Grid Background="#FFE5E5E5"/>
-		</Controls:MetroTabItem>
-	</Controls:MetroAnimatedSingleRowTabControl>
-	<Rectangle Fill="#0C282828" HorizontalAlignment="Left" Height="570" Stroke="#00000000" VerticalAlignment="Top" Width="792" Panel.ZIndex="-1"/>
-</Grid>
+			</TabItem>
+			<TabItem Header="songlist" Margin="0">
+				<Grid Background="#00E5E5E5" Height="488.5">
+					<DockPanel HorizontalAlignment="Left" Height="35" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,5,0,0">
+						<Label Content="song list" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" FontWeight="Bold" FontSize="16" Foreground="#FF5BAFDD"/>
+						<Label Content="song info" Height="35" VerticalAlignment="Top" Margin="187,0,0,0" FontWeight="Bold" FontSize="16" Foreground="#FF5BAFDD"/>
+					</DockPanel>
+					<Grid HorizontalAlignment="Left" Height="443.5" VerticalAlignment="Top" Width="772" Margin="0,45,0,0">
+						<ListBox x:Name="lboxSongList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="0,0,-100,0" Background="#30BEBEBE" Height="350">
+							<ListBoxItem Content="Ievan Polkka" Foreground="#FF282828" FontWeight="Bold"/>
+							<ListBoxItem Content="こっち向いて Baby" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="二息歩行" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="アルビノ" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="え？あぁ、そう。" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="ぽっぴっぽー" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="トリノコシティ" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="キャットフード" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="崩壊歌姫 -disruptive diva-" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="白い雪のプリンセスは" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="ワールズエンド・ダンスホール " FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="ダブルラリアット" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="No Logic" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="RIP=RELEASE" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="Japanese Ninja No.1" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="ルカルカ★ナイトフィーバー" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+						</ListBox>
+						<DockPanel HorizontalAlignment="Left" Height="39.5" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,355,0,0">
+							<Button x:Name="btnAddSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0" Click="Toggle_Dialog">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.add.png"/>
+								</Button.Background>
+							</Button>
+							<Button x:Name="btnRemoveSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="80,0,0,0">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.close.png"/>
+								</Button.Background>
+							</Button>
+							<Button x:Name="btnSaveSongInfo" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="539,0,0,-0.5">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.disk.png"/>
+								</Button.Background>
+							</Button>
+						</DockPanel>
+						<DockPanel HorizontalAlignment="Left" Height="26" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,385.5,0,0">
+							<Label Content="add" Height="26" VerticalAlignment="Top" Margin="25,0,0,0"/>
+							<Label Content="remove" Height="26" VerticalAlignment="Top" Margin="81,0,0,0"/>
+							<Label Content="save" Height="26" VerticalAlignment="Top" Margin="537,0,0,0"/>
+						</DockPanel>
+						<Grid HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="505" Margin="257,10,0,0">
+							<Label Content="song title" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+							<TextBox x:Name="tboxSongTitle" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Margin="96.023,15.316,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
+							<Label Content="api code" HorizontalAlignment="Left" Margin="10,46.28,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+							<TextBox x:Name="tBoxSongAPI" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Margin="96.023,51.596,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
+							<ListBox x:Name="lboxCharacters" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="485" Margin="10,118.84,0,0" Background="#30BEBEBE">
+								<ListBoxItem Content="[miku] Appearance Miku - Snow Miku ver. 532ed403672d3" FontWeight="Bold"/>
+								<ListBoxItem Content="[rin] Appearance Rin - adult ver. 532ebf136b926" FontWeight="Bold"/>
+							</ListBox>
+							<Label Content="character included" HorizontalAlignment="Left" Margin="10,82.56,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+							<Button x:Name="btnAddCharacterToSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Style="{DynamicResource MetroCircleButtonStyle}" Height="25" BorderBrush="Aqua" Margin="96.023,173.84,0,0">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.arrow.up.png"/>
+								</Button.Background>
+							</Button>
+							<Button x:Name="btnRemoveCharacterFromSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Style="{DynamicResource MetroCircleButtonStyle}" Height="25" BorderBrush="Aqua" Margin="354,173.84,0,0">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.arrow.down.png"/>
+								</Button.Background>
+							</Button>
+							<ListBox x:Name="lboxExistingCharacters" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="485" Margin="10,203.84,0,0" Background="#30BEBEBE">
+								<ListBoxItem Content="[miku] Appearance Miku - Snow Miku ver. 532ed403672d3" FontWeight="Bold"/>
+								<ListBoxItem Content="[rin] Appearance Rin - adult ver. 532ebf136b926" FontWeight="Bold"/>
+							</ListBox>
+							<Label Content="existing character" HorizontalAlignment="Center" Margin="180.658,170.84,180.658,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+						</Grid>
+					</Grid>
+				</Grid>
+			</TabItem>
+			<Controls:MetroTabItem Header="characters">
+				<Grid Background="#00E5E5E5">
+					<DockPanel HorizontalAlignment="Left" Height="35" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,5,0,0">
+						<Label Content="character list" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" FontWeight="Bold" FontSize="16" Foreground="#FF5BAFDD"/>
+						<Label Content="character info" Height="35" VerticalAlignment="Top" Margin="151,0,0,0" FontWeight="Bold" FontSize="16" Foreground="#FF5BAFDD"/>
+					</DockPanel>
+					<Grid HorizontalAlignment="Left" Height="443.5" VerticalAlignment="Top" Width="772" Margin="0,45,0,0">
+						<ListBox x:Name="lboxCharacterList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="0,0,-100,0" Background="#30BEBEBE" Height="350">
+							<ListBoxItem Content="RIP=RELEASE" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="Japanese Ninja No.1" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="ルカルカ★ナイトフィーバー" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+						</ListBox>
+						<DockPanel HorizontalAlignment="Left" Height="39.5" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,355,0,0">
+							<Button x:Name="btnAddCharacter" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0" Click="Toggle_Dialog">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.add.png"/>
+								</Button.Background>
+							</Button>
+							<Button x:Name="btnRemoveCharacter" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="80,0,0,0">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.close.png"/>
+								</Button.Background>
+							</Button>
+							<Button x:Name="btnSaveSongInfo1" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="539,0,0,-0.5">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.disk.png"/>
+								</Button.Background>
+							</Button>
+						</DockPanel>
+						<DockPanel HorizontalAlignment="Left" Height="26" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,385.5,0,0">
+							<Label Content="add" Height="26" VerticalAlignment="Top" Margin="25,0,0,0"/>
+							<Label Content="remove" Height="26" VerticalAlignment="Top" Margin="81,0,0,0"/>
+							<Label Content="save" Height="26" VerticalAlignment="Top" Margin="537,0,0,0"/>
+						</DockPanel>
+						<Grid HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="505" Margin="257,10,0,0">
+							<Label Content="character name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+							<TextBox x:Name="tboxCharacterName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="291.176" Margin="140.847,15.316,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
+							<Label Content="model api code" HorizontalAlignment="Left" Margin="10,46.28,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+							<TextBox x:Name="tBoxModelAPI" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="291.546" Margin="140.477,51.596,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
+							<Label Content="or" HorizontalAlignment="Center" Margin="276.926,82.596,201.926,0" VerticalAlignment="Top" Foreground="#FFF41C54" FontSize="16" FontWeight="Bold"/>
+							<CheckBox Content="specify character model on character client" Margin="10,118.876,148.34,199.844" FontWeight="Bold" FontSize="16" Foreground="#FFF41C54"/>
+							<Label Content="motion api code" HorizontalAlignment="Left" Margin="10,165.84,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+							<TextBox x:Name="tBoxMotionAPI" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="291.546" Margin="140.477,171.156,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Controls:MetroTabItem>
+			<Controls:MetroTabItem Header="effects">
+				<Grid Background="#FFE5E5E5"/>
+			</Controls:MetroTabItem>
+			<Controls:MetroTabItem Header="lighting" HorizontalAlignment="Left" VerticalAlignment="Top">
+				<Grid Background="#FFE5E5E5"/>
+			</Controls:MetroTabItem>
+			<Controls:MetroTabItem Header="statistics">
+				<Grid Background="#FFE5E5E5"/>
+			</Controls:MetroTabItem>
+			<Controls:MetroTabItem Header="about">
+				<Grid Background="#FFE5E5E5"/>
+			</Controls:MetroTabItem>
+		</Controls:MetroAnimatedSingleRowTabControl>
+	</Grid>
 </Controls:MetroWindow>
