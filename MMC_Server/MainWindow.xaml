@@ -53,6 +53,10 @@
 						<Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
+							Count="finalize" Background="#FF5EB1DF"/>
+						<Controls:Tile Title="concert" 
+							TiltFactor="2"
+							Width="100" Height="100" 
 							Count="start" Background="#CC00AAB5"/>
 						<Controls:Tile Title="concert" 
 							TiltFactor="2"
@@ -65,7 +69,7 @@
 					</DockPanel>
 				</Grid>
 			</TabItem>
-			<TabItem Header="songlist" Margin="0">
+			<TabItem Header="songs" Margin="0">
 				<Grid Background="#00E5E5E5" Height="488.5">
 					<DockPanel HorizontalAlignment="Left" Height="35" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,5,0,0">
 						<Label Content="song list" HorizontalAlignment="Left" VerticalAlignment="Top" Height="35" FontWeight="Bold" FontSize="16" Foreground="#FF5BAFDD"/>
@@ -96,7 +100,12 @@
 									<ImageBrush ImageSource="appbar.add.png"/>
 								</Button.Background>
 							</Button>
-							<Button x:Name="btnRemoveSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="80,0,0,0">
+							<Button x:Name="btnAddMisc" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,-0.5" Click="Toggle_Dialog">
+								<Button.Background>
+									<ImageBrush ImageSource="appbar.calendar.tomorrow.png"/>
+								</Button.Background>
+							</Button>
+							<Button x:Name="btnRemoveSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0">
 								<Button.Background>
 									<ImageBrush ImageSource="appbar.close.png"/>
 								</Button.Background>
@@ -109,7 +118,8 @@
 						</DockPanel>
 						<DockPanel HorizontalAlignment="Left" Height="26" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,385.5,0,0">
 							<Label Content="add" Height="26" VerticalAlignment="Top" Margin="25,0,0,0"/>
-							<Label Content="remove" Height="26" VerticalAlignment="Top" Margin="81,0,0,0"/>
+							<Label Content="misc" Height="26" VerticalAlignment="Top" Margin="28,0,0,0"/>
+							<Label Content="remove" Height="26" VerticalAlignment="Top" Margin="19,0,0,0"/>
 							<Label Content="save" Height="26" VerticalAlignment="Top" Margin="537,0,0,0"/>
 						</DockPanel>
 						<Grid HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="505" Margin="257,10,0,0">
@@ -149,9 +159,8 @@
 					</DockPanel>
 					<Grid HorizontalAlignment="Left" Height="443.5" VerticalAlignment="Top" Width="772" Margin="0,45,0,0">
 						<ListBox x:Name="lboxCharacterList" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="0,0,-100,0" Background="#30BEBEBE" Height="350">
-							<ListBoxItem Content="RIP=RELEASE" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
-							<ListBoxItem Content="Japanese Ninja No.1" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
-							<ListBoxItem Content="ルカルカ★ナイトフィーバー" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
+							<ListBoxItem Content="[miku] Appearance Miku - Snow Miku ver. 532ed403672d3" FontWeight="Bold" Foreground="#FF282828"/>
+							<ListBoxItem Content="[rin] Appearance Rin - adult ver. 532ebf136b926" FontWeight="Bold" Foreground="#FF282828"/>
 						</ListBox>
 						<DockPanel HorizontalAlignment="Left" Height="39.5" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,355,0,0">
 							<Button x:Name="btnAddCharacter" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0" Click="Toggle_Dialog">
@@ -180,10 +189,11 @@
 							<TextBox x:Name="tboxCharacterName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="291.176" Margin="140.847,15.316,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
 							<Label Content="model api code" HorizontalAlignment="Left" Margin="10,46.28,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
 							<TextBox x:Name="tBoxModelAPI" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="291.546" Margin="140.477,51.596,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
-							<Label Content="or" HorizontalAlignment="Center" Margin="276.926,82.596,201.926,0" VerticalAlignment="Top" Foreground="#FFF41C54" FontSize="16" FontWeight="Bold"/>
-							<CheckBox Content="specify character model on character client" Margin="10,118.876,148.34,199.844" FontWeight="Bold" FontSize="16" Foreground="#FFF41C54"/>
-							<Label Content="motion api code" HorizontalAlignment="Left" Margin="10,165.84,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
-							<TextBox x:Name="tBoxMotionAPI" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="291.546" Margin="140.477,171.156,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
+							<CheckBox x:Name="chkSpecifyModel" Content="specify character model on character client" Margin="10,118.912,0,199.808" FontWeight="Bold" FontSize="16" Foreground="#FFF41C54" HorizontalAlignment="Left"/>
+							<Label Content="motion api code" HorizontalAlignment="Left" Margin="10,82.596,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+							<TextBox x:Name="tBoxMotionAPI" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="291.546" Margin="140.477,87.912,0,0" Controls:TextboxHelper.ClearTextButton="True"/>
+							<CheckBox x:Name="chkSpecifyMotion" Content="specify character motion on character client" Margin="10,145.192,0,173.528" FontWeight="Bold" FontSize="16" Foreground="#FFF41C54" HorizontalAlignment="Left"/>
+							<CheckBox x:Name="chkRendered" Content="specify rendered video on character client" Margin="10,171.472,0,147.248" FontWeight="Bold" FontSize="16" Foreground="#FFF41C54" HorizontalAlignment="Left"/>
 						</Grid>
 					</Grid>
 				</Grid>

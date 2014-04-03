@@ -126,6 +126,7 @@
     <Resource Include="appbar.add.png" />
     <Resource Include="appbar.arrow.down.png" />
     <Resource Include="appbar.arrow.up.png" />
+    <Resource Include="appbar.calendar.tomorrow.png" />
     <Resource Include="appbar.close.png" />
     <Resource Include="appbar.disk.png" />
     <Resource Include="geometry_%402X.png" />
