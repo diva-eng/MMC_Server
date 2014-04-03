@@ -31,7 +31,6 @@ namespace MMC_Server
         }
         private void ToggleFlyout(int index)
         {
-            CloseAllFlyout();
             var flyout = this.Flyouts.Items[index] as Flyout;
             if (flyout == null)
             {
@@ -44,10 +43,6 @@ namespace MMC_Server
         private void Toggle_Settings(object sender, RoutedEventArgs e)
         {
             ToggleFlyout(0);
-        }
-		private void Toggle_DeviceList(object sender, RoutedEventArgs e)
-        {
-            ToggleFlyout(1);
         }
         private void CloseAllFlyout()
         {

@@ -1,7 +1,6 @@
 ﻿<Controls:MetroWindow
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:c="clr-namespace:MMC_Control"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MMC_Server.MainWindow"
         Title="Miku Miku Concert Server" Height="600" Width="800" Icon="miku.png" ResizeMode="CanResizeWithGrip" MinWidth="800" MinHeight="600">
@@ -26,9 +25,6 @@
 		<Controls:Flyout Header="Settings" Position="Right" Width="300" Theme="Dark">
 		<!-- Your custom content here -->
 		</Controls:Flyout>
-		<Controls:Flyout Header="Devices" Position="Right" Width="500" Theme="Accent">
-		<!-- Your custom content here -->
-		</Controls:Flyout>
 	</Controls:FlyoutsControl>
 </Controls:MetroWindow.Flyouts>
 	<Grid>
@@ -43,7 +39,6 @@
 			<Label x:Name="lblEffectsNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFF41C54"/>
 			<Label Content="lighting client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
 			<Label x:Name="lblLightingNum" Content="0" Height="30" VerticalAlignment="Top" Background="#00000000" Foreground="#FFF41C54"/>
-			<Button Content="client list" Height="30" VerticalAlignment="Top" Width="75" Style="{DynamicResource SquareButtonStyle}" Click="Toggle_DeviceList" Margin="30,0,0,0"/>
 		
 		</DockPanel>
 		<Controls:MetroAnimatedSingleRowTabControl x:Name="tabMainControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Width="772">
@@ -202,10 +197,7 @@
 					</Grid>
 				</Grid>
 			</Controls:MetroTabItem>
-			<Controls:MetroTabItem Header="effects">
-				<Grid Background="#FFE5E5E5"/>
-			</Controls:MetroTabItem>
-			<Controls:MetroTabItem Header="lighting" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<Controls:MetroTabItem Header="devices">
 				<Grid Background="#FFE5E5E5"/>
 			</Controls:MetroTabItem>
 			<Controls:MetroTabItem Header="statistics">
