@@ -49,11 +49,15 @@
 		<Controls:MetroAnimatedSingleRowTabControl x:Name="tabMainControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Width="772">
 			<TabItem Header="concert">
 				<Grid Background="#00F0F0F0">
+					<DockPanel HorizontalAlignment="Center" LastChildFill="False" VerticalAlignment="Top" Margin="0,60,0,0">
+						<Label Content="concert title" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
+						<TextBox x:Name="tboxConcertTitle" Height="23" TextWrapping="Wrap" Width="300" Controls:TextboxHelper.ClearTextButton="True"/>
+					</DockPanel>
 					<DockPanel HorizontalAlignment="Center" LastChildFill="False" VerticalAlignment="Top" Margin="0,100,0,0">
 						<Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
-							Count="finalize" Background="#FF5EB1DF"/>
+							Count="finalize" Background="#FF5EB1DF" Click="Finalize"/>
 						<Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
@@ -95,12 +99,12 @@
 							<ListBoxItem Content="ルカルカ★ナイトフィーバー" FontWeight="Bold" Height="25" Width="200" Foreground="#FF282828"/>
 						</ListBox>
 						<DockPanel HorizontalAlignment="Left" Height="39.5" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,355,0,0">
-							<Button x:Name="btnAddSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0" Click="Toggle_Dialog">
+							<Button x:Name="btnAddSong" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0" Click="Toggle_DialogSongName">
 								<Button.Background>
 									<ImageBrush ImageSource="appbar.add.png"/>
 								</Button.Background>
 							</Button>
-							<Button x:Name="btnAddMisc" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,-0.5" Click="Toggle_Dialog">
+							<Button x:Name="btnAddMisc" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,-0.5">
 								<Button.Background>
 									<ImageBrush ImageSource="appbar.calendar.tomorrow.png"/>
 								</Button.Background>
@@ -163,7 +167,7 @@
 							<ListBoxItem Content="[rin] Appearance Rin - adult ver. 532ebf136b926" FontWeight="Bold" Foreground="#FF282828"/>
 						</ListBox>
 						<DockPanel HorizontalAlignment="Left" Height="39.5" LastChildFill="False" VerticalAlignment="Top" Width="772" Margin="0,355,0,0">
-							<Button x:Name="btnAddCharacter" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0" Click="Toggle_Dialog">
+							<Button x:Name="btnAddCharacter" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Style="{DynamicResource MetroCircleButtonStyle}" Height="40" BorderBrush="Aqua" Margin="20,0,0,0" Click="Toggle_DialogCharacterName">
 								<Button.Background>
 									<ImageBrush ImageSource="appbar.add.png"/>
 								</Button.Background>

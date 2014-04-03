@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro;
 
 namespace MMC_Server
 {
@@ -26,6 +27,7 @@ namespace MMC_Server
         public MainWindow()
         {
             InitializeComponent();
+            this.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
         }
         private void ToggleFlyout(int index)
         {
@@ -56,9 +58,47 @@ namespace MMC_Server
             }
         }
 
-        private async void Toggle_Dialog(object sender, RoutedEventArgs e)
+        private async void Toggle_DialogSongName(object sender, RoutedEventArgs e)
         {
             var result = await this.ShowInputAsync("please input song title.", "song title");
+        }
+
+        private void Finalize(object sender, RoutedEventArgs e)
+        {
+            CalibrateAndTransfer();
+        }
+
+
+        private async void CalibrateAndTransfer()
+        {
+            await this.ShowMessageAsync("calibration enabled on all devices.", "please calibrate screens and click ok to finish.");
+            var controller = await this.ShowProgressAsync("transferring data to clients", "please wait.");
+
+            await Task.Delay(2000);
+
+            double i = 0.0;
+            while (i < 6.0)
+            {
+                double val = (i / 100.0) * 20.0;
+                controller.SetProgress(val);
+                controller.SetMessage("sending songs: " + i + "...");
+
+                i += 1.0;
+
+                await Task.Delay(1000);
+            }
+
+            await controller.CloseAsync();
+
+            if (!controller.IsCanceled)
+            {
+                await this.ShowMessageAsync("done", "\"" + tboxConcertTitle.Text + "\" is ready to start!");
+            }
+        }
+
+        private async void Toggle_DialogCharacterName(object sender, RoutedEventArgs e)
+        {
+            var result = await this.ShowInputAsync("please input character title.", "character title");
         }
     }
 }
