@@ -8,4 +8,23 @@
         <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
         <ResourceDictionary Source="Resources/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    
+    <!-- Colors & Brushes -->
+    <SolidColorBrush x:Key="ForegroundLight" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ForegroundDark" Color="#000000" />
+    <SolidColorBrush x:Key="BackgroundGreen" Color="#0AC24A" />
+    <SolidColorBrush x:Key="BackgroundRed" Color="#BF1D00" />
+    <SolidColorBrush x:Key="BackgroundGrey" Color="#808080" />
+    
+    <SolidColorBrush x:Key="StrokeDark" Color="#888888" />
+    
+    <!-- Common Styles -->
+    <Style TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    
+    <!-- Converters -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    
 </ResourceDictionary>
