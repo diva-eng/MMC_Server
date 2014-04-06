@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MMC_Server.MainWindow"
-        Title="Miku Miku Concert Server" Height="600" Width="800" Icon="miku.png" ResizeMode="CanResizeWithGrip" MinWidth="800" MinHeight="600">
+        Title="Miku Miku Concert Server" Height="600" Width="800" Icon="miku.png" MinWidth="800" MinHeight="600"
+        SnapsToDevicePixels="True">
 <Controls:MetroWindow.Resources>
 <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
@@ -12,7 +13,7 @@
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
 </Controls:MetroWindow.Resources>
-	<Controls:MetroWindow.Background>
+<Controls:MetroWindow.Background>
 		<ImageBrush ImageSource="geometry_@2X.png" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,412,412"/>
 	</Controls:MetroWindow.Background>
 <Controls:MetroWindow.WindowCommands>
@@ -28,44 +29,48 @@
 	</Controls:FlyoutsControl>
 </Controls:MetroWindow.Flyouts>
 	<Grid>
-		<DockPanel x:Name="Status_Panel" HorizontalAlignment="Left" Height="30" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="772">
-			<Label Content="status:" Height="30" VerticalAlignment="Top" Width="45.097" Foreground="#FFC1C923"/>
-			<Label x:Name="lblServerStatus" Content="server started" Height="30" VerticalAlignment="Top" Background="#00000000" BorderThickness="0" Foreground="#FF00AAB5" Margin="3,0,0,0"/>
-			<Label Content="client status:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-			<Label x:Name="lblClientStatus" Content="no clients connected" Height="30" VerticalAlignment="Top" BorderThickness="3,0,0,0" Foreground="#FFF41C54"/>
-			<Label Content="character client:" Height="30" VerticalAlignment="Top" BorderThickness="0" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-			<Label x:Name="lblCharacterNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Background="#00000000" Foreground="#FFF41C54"/>
-			<Label Content="effects client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-			<Label x:Name="lblEffectsNum" Content="0" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFF41C54"/>
-			<Label Content="lighting client:" Height="30" VerticalAlignment="Top" Margin="3,0,0,0" Foreground="#FFC1C923"/>
-			<Label x:Name="lblLightingNum" Content="0" Height="30" VerticalAlignment="Top" Background="#00000000" Foreground="#FFF41C54"/>
-		
-		</DockPanel>
-		<Controls:MetroAnimatedSingleRowTabControl x:Name="tabMainControl" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,40,0,0" Width="772">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>   
+
+        <Controls:MetroAnimatedSingleRowTabControl x:Name="tabMainControl">
 			<TabItem Header="concert">
-				<Grid Background="#00F0F0F0">
-					<DockPanel HorizontalAlignment="Center" LastChildFill="False" VerticalAlignment="Top" Margin="0,60,0,0">
-						<Label Content="concert title" FontSize="16" FontWeight="Bold" Foreground="#FFF41C54"/>
-						<TextBox x:Name="tboxConcertTitle" Height="23" TextWrapping="Wrap" Width="300" Controls:TextboxHelper.ClearTextButton="True"/>
-					</DockPanel>
-					<DockPanel HorizontalAlignment="Center" LastChildFill="False" VerticalAlignment="Top" Margin="0,100,0,0">
-						<Controls:Tile Title="concert" 
+				<Grid Height="Auto" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" HorizontalAlignment="Stretch" Background="White" Margin="0, 2">
+                        <TextBlock VerticalAlignment="Center" Margin="5, 0" Foreground="{DynamicResource BackgroundGrey}" 
+                                   Visibility="{Binding Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=tboxConcertTitle}">Concert Title</TextBlock>
+						<TextBox x:Name="tboxConcertTitle" Background="Transparent" Controls:TextboxHelper.ClearTextButton="True"/>
+                    </Grid>
+
+                    <Separator Grid.Row="1" />
+                    
+                    <WrapPanel Grid.Row="2">
+                        <Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
 							Count="finalize" Background="#FF5EB1DF" Click="Finalize"/>
-						<Controls:Tile Title="concert" 
+                        <Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
 							Count="start" Background="#CC00AAB5"/>
-						<Controls:Tile Title="concert" 
+                        <Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
 							Count="pause" Background="#CCC1C923"/>
-						<Controls:Tile Title="concert" 
+                        <Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
 							Count="stop" Background="#CCF41C54"/>
-					</DockPanel>
+                    </WrapPanel>
 				</Grid>
 			</TabItem>
 			<TabItem Header="songs" Margin="0">
@@ -207,5 +212,39 @@
 				<Grid Background="#FFE5E5E5"/>
 			</Controls:MetroTabItem>
 		</Controls:MetroAnimatedSingleRowTabControl>
-	</Grid>
+
+        <Grid HorizontalAlignment="Stretch" Grid.Row="1" Background="{DynamicResource ResourceKey=AccentColorBrush}">
+            <StackPanel x:Name="Status_Panel" HorizontalAlignment="Left" Orientation="Horizontal" Height="30" >
+                
+                <Border BorderBrush="{DynamicResource AccentColorBrush2}" BorderThickness="1" VerticalAlignment="Center" Padding="5, 1" Margin="5, 0"
+                        Background="{DynamicResource BackgroundGreen}">
+                    <TextBlock x:Name="lblServerStatus" Foreground="{DynamicResource ForegroundLight}" FontWeight="SemiBold" >Server Started</TextBlock>
+                </Border>
+
+                <Border BorderBrush="{DynamicResource AccentColorBrush2}" BorderThickness="1" VerticalAlignment="Center" Padding="5, 1" Margin="5, 0"
+                        Background="{DynamicResource BackgroundRed}">
+                    <TextBlock x:Name="lblClientStatus" Foreground="{DynamicResource ForegroundLight}" FontWeight="SemiBold" >No Clients Connected</TextBlock>
+                </Border>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Height="30" >
+
+                <Border BorderBrush="{DynamicResource AccentColorBrush2}" BorderThickness="1" VerticalAlignment="Center" Padding="5, 1" Margin="5, 0"
+                        Background="{DynamicResource BackgroundGrey}">
+                    <TextBlock x:Name="lblCharacterNum" Foreground="{DynamicResource ForegroundLight}" FontWeight="SemiBold" >No Character Clients</TextBlock>
+                </Border>
+
+                <Border BorderBrush="{DynamicResource AccentColorBrush2}" BorderThickness="1" VerticalAlignment="Center" Padding="5, 1" Margin="5, 0"
+                        Background="{DynamicResource BackgroundGrey}">
+                    <TextBlock x:Name="lblEffectsNum" Foreground="{DynamicResource ForegroundLight}" FontWeight="SemiBold" >No SFX CLients</TextBlock>
+                </Border>
+
+                <Border BorderBrush="{DynamicResource AccentColorBrush2}" BorderThickness="1" VerticalAlignment="Center" Padding="5, 1" Margin="5, 0"
+                        Background="{DynamicResource BackgroundGrey}">
+                    <TextBlock x:Name="lblLightingNum" Foreground="{DynamicResource ForegroundLight}" FontWeight="SemiBold" >No Lightning Clients</TextBlock>
+                </Border>
+
+            </StackPanel>
+        </Grid>
+
+    </Grid>
 </Controls:MetroWindow>
