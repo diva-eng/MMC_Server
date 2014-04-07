@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro;
+using MMC_Server.ViewModel;
+using MMC_Server.Model;
+using System.Drawing;
 
 namespace MMC_Server
 {
@@ -27,7 +30,113 @@ namespace MMC_Server
         public MainWindow()
         {
             InitializeComponent();
-            this.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
+            //this.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
+
+            this.DataContext = new MainWindowViewModel();
+
+#if DEBUG
+
+            var c = new Character
+            {
+                Name = "Miku [1]",
+                ModelCode = "SpqhgyzipV",
+                MotionCode = "erdT4oRZ3s",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/accessory/532686332fe7d/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [2]",
+                ModelCode = "bQAZAFe0Et",
+                MotionCode = "DV1xHJP1SY",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/model/53325ac36de9a/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [1]",
+                ModelCode = "SpqhgyzipV",
+                MotionCode = "erdT4oRZ3s",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/accessory/532686332fe7d/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [2]",
+                ModelCode = "bQAZAFe0Et",
+                MotionCode = "DV1xHJP1SY",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/model/53325ac36de9a/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [1]",
+                ModelCode = "SpqhgyzipV",
+                MotionCode = "erdT4oRZ3s",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/accessory/532686332fe7d/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [2]",
+                ModelCode = "bQAZAFe0Et",
+                MotionCode = "DV1xHJP1SY",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/model/53325ac36de9a/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [1]",
+                ModelCode = "SpqhgyzipV",
+                MotionCode = "erdT4oRZ3s",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/accessory/532686332fe7d/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [2]",
+                ModelCode = "bQAZAFe0Et",
+                MotionCode = "DV1xHJP1SY",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/model/53325ac36de9a/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [1]",
+                ModelCode = "SpqhgyzipV",
+                MotionCode = "erdT4oRZ3s",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/accessory/532686332fe7d/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            c = new Character
+            {
+                Name = "Miku [2]",
+                ModelCode = "bQAZAFe0Et",
+                MotionCode = "DV1xHJP1SY",
+                Preview = new BitmapImage(new Uri("http://motiondex.com/resources/model/53325ac36de9a/preview.png"))
+            };
+            lboxCharCharacters.Items.Add(c);
+
+            /*
+            lboxCharCharacters.Items.Add(new Character
+            {
+                Name = "Miku [2]"//,
+                //ModelCode = "HI7dNej7UI",
+                //MotionCode = "WMHIWpY8eS"//,
+                //Preview = new BitmapImage(new Uri("preview1.png", UriKind.RelativeOrAbsolute))
+            });
+            */
+#endif
+
         }
         private void ToggleFlyout(int index)
         {
@@ -62,8 +171,7 @@ namespace MMC_Server
         {
             CalibrateAndTransfer();
         }
-
-
+        
         private async void CalibrateAndTransfer()
         {
             await this.ShowMessageAsync("calibration enabled on all devices.", "please calibrate screens and click ok to finish.");
