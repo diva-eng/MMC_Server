@@ -11,12 +11,13 @@ using System.Windows.Forms;
 
 using Lidgren.Network;
 using SamplesCommon;
+using MMC;
 
 namespace MMC_Client
 {
     public partial class Form1 : Form
     {
-        private static NetPeer s_server;
+        private static MMCPeer s_server;
 
         public Form1()
         {
@@ -38,7 +39,9 @@ namespace MMC_Client
             config.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
             config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
 
-            s_server = new NetPeer(config);
+            MMCPeerConfig pConfig = new MMCPeerConfig(config, PeerType.CHARACTER, "Peer1");
+
+            s_server = new MMCPeer(pConfig);
             Output("listening on " + config.Port.ToString());
             s_server.RegisterReceivedCallback(new SendOrPostCallback(GotMessage));
             s_server.Start();
@@ -55,7 +58,7 @@ namespace MMC_Client
                     case NetIncomingMessageType.DiscoveryRequest:
                         Output("Recieved Discovery Signal");
                         NetOutgoingMessage response = s_server.CreateMessage();
-                        response.Write("character@MMC_Server01");
+                        response.Write(s_server.pConfig.type.ToString() + "@" + s_server.pConfig.name);
  
                         // Send the response to the sender of the request
                         s_server.SendDiscoveryResponse(response, im.SenderEndPoint);

@@ -60,7 +60,7 @@ namespace MMC_Server
                             string[] id = im.ReadString().Split('@');
                             switch (id[0])
                             {
-                                case "character":
+                                case "CHARACTER":
                                     Output("Found Character Client: " + id[1]);
                                     break;
                             }
