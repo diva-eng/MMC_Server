@@ -43,7 +43,7 @@ namespace MMC_Client
 
             s_server = new MMCPeer(pConfig);
             Output("listening on " + config.Port.ToString());
-            s_server.RegisterReceivedCallback(new SendOrPostCallback(GotMessage));
+            s_server.RegisterReceivedCallback(GotMessage);
             s_server.Start();
         }
 
