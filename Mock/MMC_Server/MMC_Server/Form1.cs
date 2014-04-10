@@ -10,13 +10,15 @@ using System.Threading;
 using System.Windows.Forms;
 
 using Lidgren.Network;
+using System.Net;
 using SamplesCommon;
+using MMC;
 
 namespace MMC_Server
 {
     public partial class Form1 : Form
     {
-        private static NetPeer s_server;
+        private static MMCPeer s_server;
         public Form1()
         {
             InitializeComponent();
@@ -36,41 +38,23 @@ namespace MMC_Server
             config.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
             config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
 
-            s_server = new NetPeer(config);
+            MMCPeerConfig pConfig = new MMCPeerConfig(config, PeerType.CONTROLLER, "Controller1");
+
+            s_server = new MMCPeer(pConfig);
+            s_server.RegisterCallback(new Action(GotMessage));
             Output("listening on " + config.Port.ToString());
             s_server.Start();
             
 
         }
 
+        public void GotMessage()
+        {
+        }
+
 
         private void Application_Idle(object sender, EventArgs e)
         {
-            if(s_server != null)
-            while (NativeMethods.AppStillIdle)
-            {
-                NetIncomingMessage im;
-                while ((im = s_server.ReadMessage()) != null)
-                {
-                    // handle incoming message
-                    switch (im.MessageType)
-                    {
-                        case NetIncomingMessageType.DiscoveryResponse:
-                            Output("Found client!");
-                            string[] id = im.ReadString().Split('@');
-                            switch (id[0])
-                            {
-                                case "CHARACTER":
-                                    Output("Found Character Client: " + id[1]);
-                                    break;
-                            }
-                            break;
-                        default:
-                            Output("Unhandled type: " + im.MessageType + " " + im.LengthBytes + " bytes " + im.DeliveryMethod + "|" + im.SequenceChannel);
-                            break;
-                    }
-                }
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -83,6 +67,18 @@ namespace MMC_Server
         private void button3_Click(object sender, EventArgs e)
         {
             s_server.Shutdown("bye");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Output("====Discovered Clients====");
+            foreach (ClientValue i in s_server.DiscoveredClients)
+            {
+                Output("Client: " + i.Key);
+                Output("Value: " + i.Value[0] + "@" + i.Value[1]);
+                Output("Hashcode: " + i.GetHashCode());
+            }
+            Output("====End of the list====");
         }
     }
 }

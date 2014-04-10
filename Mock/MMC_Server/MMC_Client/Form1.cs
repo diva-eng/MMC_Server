@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 using Lidgren.Network;
 using SamplesCommon;
@@ -49,30 +50,15 @@ namespace MMC_Client
 
         public void GotMessage()
         {
-            NetIncomingMessage im;
-            while ((im = s_server.ReadMessage()) != null)
-            {
-                // handle incoming message
-                switch (im.MessageType)
-                {
-                    case NetIncomingMessageType.DiscoveryRequest:
-                        Output("Recieved Discovery Signal");
-                        NetOutgoingMessage response = s_server.CreateMessage();
-                        response.Write(s_server.pConfig.type.ToString() + "@" + s_server.pConfig.name);
- 
-                        // Send the response to the sender of the request
-                        s_server.SendDiscoveryResponse(response, im.SenderEndPoint);
-                        break;
-                    default:
-                        Output("Unhandled type: " + im.MessageType + " " + im.LengthBytes + " bytes");
-                        break;
-                }
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             s_server.Shutdown("bye");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
         }
     }
 }
