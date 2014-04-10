@@ -43,11 +43,11 @@ namespace MMC_Client
 
             s_server = new MMCPeer(pConfig);
             Output("listening on " + config.Port.ToString());
-            s_server.RegisterReceivedCallback(GotMessage);
+            s_server.RegisterCallback(new Action(GotMessage));
             s_server.Start();
         }
 
-        public void GotMessage(object peer)
+        public void GotMessage()
         {
             NetIncomingMessage im;
             while ((im = s_server.ReadMessage()) != null)

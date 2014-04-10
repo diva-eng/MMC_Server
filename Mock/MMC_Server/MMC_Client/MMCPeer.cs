@@ -33,7 +33,7 @@ namespace MMC
             // Send the response to the sender of the request
             this.SendDiscoveryResponse(response, message.SenderEndPoint);
         }
-        public void RegisterReceivedCallback(Action callback)
+        public void RegisterCallback(Action callback)
         {
             UserCallback = callback;
         }
