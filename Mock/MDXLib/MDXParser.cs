@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 using System.Net.Http;
 
+using MDXLib.data;
+using Newtonsoft.Json;
+
 namespace MDXLib.API
 {
     public class MDXParser
@@ -19,7 +22,7 @@ namespace MDXLib.API
             client.DefaultRequestHeaders.ExpectContinue = false;
             userAPICode = userAPI;
         }
-        public string GetFile(string api)
+        public string GetFileString(string api)
         {
             var content = new FormUrlEncodedContent(new[]
                 {
@@ -29,6 +32,11 @@ namespace MDXLib.API
             var result = client.PostAsync(new Uri(serverAddress, filePath[(int)RequestType.FileFromAPI]), content).Result;
             result.EnsureSuccessStatusCode();
             return result.Content.ReadAsStringAsync().Result;
+        }
+        public MDXData GetFile(string api)
+        {
+            string json = GetFileString(api);
+            return JsonConvert.DeserializeObject<MDXData>(json);
         }
         private string[] filePath = new string[]
         {

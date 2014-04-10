@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace MDXLib.data
 {
-    public class MDXDataBase
+    //Basic Data model for MDX responses
+    public class MDXData
     {
+        public string apiid;
+        public string filename;
+        public string fullpreview;
+        public string preview;
     }
-    public class MDXSongBase
+    public class MDXSong
     {
     }
 }

@@ -23,7 +23,7 @@ namespace MDXLib_Test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = parser.GetFile(textBox1.Text);
+            richTextBox1.Text = parser.GetFile(textBox1.Text).filename;
         }
     }
 }
