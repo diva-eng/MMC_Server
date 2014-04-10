@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC_Client", "MMC_Client\MM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMCLib", "..\MMCLib\MMCLib.csproj", "{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDXLib", "..\MDXLib\MDXLib.csproj", "{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDXLib Test", "..\MDXLib Test\MDXLib Test.csproj", "{98122FB8-BCDD-45BE-89FA-C883291EB30B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98122FB8-BCDD-45BE-89FA-C883291EB30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98122FB8-BCDD-45BE-89FA-C883291EB30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98122FB8-BCDD-45BE-89FA-C883291EB30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98122FB8-BCDD-45BE-89FA-C883291EB30B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
