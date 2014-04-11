@@ -11,18 +11,20 @@ namespace MMC
 {
     public class MMCMessage
     {
-        public IPEndPoint sender;
-        public IPEndPoint reciever;
-        public ReturnStatus status;
-        public DataType[] type;
-        public string stringData;
-        public byte[] byteData;
-        public MMCControl controlData;
-        public MMCSong songData;
-        public MMCCharacter characterData;
+        public IPEndPoint Sender;
+        public IPEndPoint Reciever;
+        public ReturnStatus Status;
+        public DataType[] Type;
+        public string StringData;
+        public byte[] ByteData;
+        public MMCControl ControlData;
+        public MMCSong SongData;
+        public MMCCharacter CharacterData;
     }
     public class MMCControl
     {
+        public ControlType Type;
+        public BasicControl Control;
     }
     public class MMCSong
     {
@@ -68,5 +70,21 @@ namespace MMC
         CONTROL,
         SONG,
         CHARACTER
+    }
+    public enum ControlType
+    {
+        BASIC,
+        COMPLEX,
+        DATA
+    }
+    public enum BasicControl
+    {
+        //Playback control
+        PLAY,
+        PAUSE,
+        STOP,
+        //Util
+        CALIB,
+        LOCK
     }
 }
