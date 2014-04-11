@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using MDXLib.API;
+using MDXLib.data;
 
 namespace MDXLib_Test
 {
@@ -23,7 +24,11 @@ namespace MDXLib_Test
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = parser.GetFile(textBox1.Text).filename;
+            /*
+            MDXFile motion = parser.GetFile(textBox1.Text);
+            richTextBox1.Text = motion.ToString();
+            pictureBox1.Load(motion.GetPreview().ToString());*/
+            richTextBox1.AppendText(parser.GetPost(textBox1.Text).ToString());
         }
     }
 }

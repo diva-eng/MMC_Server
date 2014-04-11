@@ -22,29 +22,44 @@ namespace MDXLib.API
             client.DefaultRequestHeaders.ExpectContinue = false;
             userAPICode = userAPI;
         }
-        public string GetFileString(string api)
+        public string GetFromServer(RequestType type, string api)
         {
             var content = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string,string>("apicode", userAPICode),
                     new KeyValuePair<string,string>("apiid", api)
                 });
-            var result = client.PostAsync(new Uri(serverAddress, filePath[(int)RequestType.FileFromAPI]), content).Result;
+            var result = client.PostAsync(new Uri(serverAddress, filePath[(int)type]), content).Result;
             result.EnsureSuccessStatusCode();
             return result.Content.ReadAsStringAsync().Result;
         }
-        public MDXData GetFile(string api)
+        public string GetPostString(string api)
+        {
+            return GetFromServer(RequestType.PostFromAPI, api);
+        }
+        public MDXPost GetPost(string api)
+        {
+            string json = GetPostString(api);
+            return JsonConvert.DeserializeObject<MDXPost>(json);
+        }
+        public string GetFileString(string api)
+        {
+            return GetFromServer(RequestType.FileFromAPI, api);
+        }
+        public MDXFile GetFile(string api)
         {
             string json = GetFileString(api);
-            return JsonConvert.DeserializeObject<MDXData>(json);
+            return JsonConvert.DeserializeObject<MDXFile>(json);
         }
         private string[] filePath = new string[]
         {
-            "fileFromID.php"
+            "fileFromID.php",
+            "postFromID.php"
         };
     }
     public enum RequestType
     {
-        FileFromAPI
+        FileFromAPI,
+        PostFromAPI
     }
 }

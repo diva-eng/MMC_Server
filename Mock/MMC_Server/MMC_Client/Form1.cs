@@ -40,7 +40,7 @@ namespace MMC_Client
             config.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
             config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
 
-            MMCPeerConfig pConfig = new MMCPeerConfig(config, PeerType.CHARACTER, "Peer1");
+            MMCPeerConfig pConfig = new MMCPeerConfig(config, PeerType.CHARACTER, "Peer2");
 
             s_server = new MMCPeer(pConfig);
             Output("listening on " + config.Port.ToString());
