@@ -85,6 +85,7 @@ namespace MMC
         STOP,
         //Util
         CALIB,
-        LOCK
+        LOCK,
+        UNLOCK
     }
 }

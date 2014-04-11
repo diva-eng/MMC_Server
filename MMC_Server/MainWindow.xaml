@@ -52,7 +52,7 @@
                         <Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 
-							Count="finalize" Background="#FF5EB1DF" Click="Finalize"/>
+							Count="finalize" Background="#FF5EB1DF" Click="Toggle_LockDialog"/>
                         <Controls:Tile Title="concert" 
 							TiltFactor="2"
 							Width="100" Height="100" 

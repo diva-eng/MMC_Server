@@ -199,6 +199,25 @@ namespace MMC_Server
             }
         }
 
+        private async void Toggle_LockDialog(object sender, RoutedEventArgs e)
+        {
+            var controller = await this.ShowProgressAsync("station locked by controller-V1", "please wait till it is unlocked by controller");
+
+            await Task.Delay(2000);
+
+            while (true)
+            {
+                await Task.Delay(1000);
+            }
+
+            await controller.CloseAsync();
+
+            if (!controller.IsCanceled)
+            {
+                await this.ShowMessageAsync("station unlocked", "command function is restored.");
+            }
+        }
+
         private async void Toggle_DialogCharacterName(object sender, RoutedEventArgs e)
         {
             var result = await this.ShowInputAsync("please input character title.", "character title");
