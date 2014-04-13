@@ -59,6 +59,11 @@ namespace MMC_Server
                     string text = msg.ReadString();
                     Output(text);
                    break;
+                case NetIncomingMessageType.StatusChanged:
+                   NetConnectionStatus status = (NetConnectionStatus)msg.ReadByte();
+                   string reason = msg.ReadString();
+                   Output(NetUtility.ToHexString(msg.SenderConnection.RemoteUniqueIdentifier) + " " + status + ": " + reason);
+                   break;
             }
         }
 
@@ -71,7 +76,10 @@ namespace MMC_Server
         {
             // Emit a discovery signal
             Output("discovering clients");
-            s_server.DiscoverLocalPeers(39393);
+            for (int i = trackBar1.Minimum; i <= trackBar1.Maximum; i++)
+            {
+                s_server.DiscoverLocalPeers(i);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -109,6 +117,42 @@ namespace MMC_Server
                 Output("Connection: " + NetUtility.ToHexString(c.RemoteUniqueIdentifier));
             }
             Output("====End Connections====");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MMCMessage message = new MMCMessage();
+            MMCCharacter character = new MMCCharacter();
+            character.ModelAPI = "53325ac36de9a";
+            character.MotionAPI = "532ed403672d3";
+            character.Name = "Racing Miku";
+            character.UseClientModel = false;
+            character.UseClientMotion = false;
+            character.UseClientRender = false;
+            message.Status = ReturnStatus.OK;
+            message.Type = new DataType[] { DataType.CHARACTER };
+            message.CharacterData = character;
+            string id = character.Finalize();
+            
+            Output("sending: " + id);
+            Output("====decoded id====");
+            Output(MMCCharacter.Base64Decode(id));
+            
+            MMCMessage message1 = new MMCMessage();
+            MMCControl control = new MMCControl();
+            control.Type = ControlType.BASIC;
+            control.BasicControl = BasicControl.LOCK;
+            message1.ControlData = control;
+            message1.Type = new DataType[] { DataType.CONTROL };
+            
+            
+            foreach (NetConnection c in s_server.Connections)
+            {
+                s_server.SendMessage(message, c);
+                Output("sending to: " + s_server.GetConnectionInfo(c).Value[0] + "@" + s_server.GetConnectionInfo(c).Value[1]);
+                s_server.SendMessage(message1, c);
+                Output("sending to: " + s_server.GetConnectionInfo(c).Value[0] + "@" + s_server.GetConnectionInfo(c).Value[1]);
+            }
         }
     }
 }

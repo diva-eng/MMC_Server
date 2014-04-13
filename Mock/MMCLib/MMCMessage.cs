@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 using System.Net;
 
 using Lidgren.Network;
+using Newtonsoft.Json;
 
 namespace MMC
 {
     public class MMCMessage
     {
-        public IPEndPoint Sender;
-        public IPEndPoint Reciever;
         public ReturnStatus Status;
         public DataType[] Type;
         public string StringData;
@@ -24,7 +23,7 @@ namespace MMC
     public class MMCControl
     {
         public ControlType Type;
-        public BasicControl Control;
+        public BasicControl BasicControl;
     }
     public class MMCSong
     {
@@ -32,14 +31,22 @@ namespace MMC
         public string SongAPI;
         public List<string> Characters;
     }
+    [JsonObject(MemberSerialization.OptIn)]
     public class MMCCharacter
     {
+        [JsonProperty]
         public string Name;
+        [JsonProperty]
         public string ModelAPI;
+        [JsonProperty]
         public string MotionAPI;
+        [JsonProperty]
         public bool UseClientModel;
+        [JsonProperty]
         public bool UseClientMotion;
+        [JsonProperty]
         public bool UseClientRender;
+        [JsonProperty]
         private string ID;
         public string Finalize()
         {

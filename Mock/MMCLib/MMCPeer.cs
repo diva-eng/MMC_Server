@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 
 using Lidgren.Network;
+using Newtonsoft.Json;
 
 namespace MMC
 {
@@ -52,6 +53,21 @@ namespace MMC
         public void RegisterCallback(Action<NetIncomingMessage> callback)
         {
             UserCallback = callback;
+        }
+        public void SendMessage(MMCMessage message, NetConnection connection)
+        {
+            NetOutgoingMessage msg = this.CreateMessage();
+            msg.Write(JsonConvert.SerializeObject(message));
+            this.SendMessage(msg, connection, NetDeliveryMethod.ReliableOrdered);
+        }
+        public ClientValue GetConnectionInfo(NetConnection connection)
+        {
+            foreach (ClientValue c in DiscoveredClients)
+            {
+                if (c.Key == connection.RemoteEndPoint)
+                    return c;
+            }
+            return new ClientValue(new IPEndPoint(IPAddress.Parse("0.0.0.0"), 0), new string [] {"UNKNOWN", "CLIENT"});
         }
         private void MessageCallback(object peer)
         {

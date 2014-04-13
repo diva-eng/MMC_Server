@@ -35,13 +35,13 @@ namespace MMC_Client
         {
             NetPeerConfiguration config = new NetPeerConfiguration("MMC");
             config.MaximumConnections = 100;
-            config.Port = 39393;
+            config.Port = (int)numericUpDown1.Value;
             // Enable DiscoveryResponse messages
             config.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
             config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
             config.AcceptIncomingConnections = true;
 
-            MMCPeerConfig pConfig = new MMCPeerConfig(config, PeerType.CHARACTER, "Peer2");
+            MMCPeerConfig pConfig = new MMCPeerConfig(config, (PeerType)comboBox1.SelectedIndex, textBox1.Text);
 
             s_server = new MMCPeer(pConfig);
             Output("listening on " + config.Port.ToString());
@@ -65,7 +65,9 @@ namespace MMC_Client
                    NetConnectionStatus status = (NetConnectionStatus)msg.ReadByte();
                    string reason = msg.ReadString();
                    Output(NetUtility.ToHexString(msg.SenderConnection.RemoteUniqueIdentifier) + " " + status + ": " + reason);
-
+                   break;
+                case NetIncomingMessageType.Data:
+                   Output(msg.ReadString());
                    break;
             }
         }
