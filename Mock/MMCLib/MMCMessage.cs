@@ -41,10 +41,13 @@ namespace MMC
         public bool UseClientMotion;
         public bool UseClientRender;
         private string ID;
-        public void Finalize()
+        public string Finalize()
         {
-            if (ID != null)
+            if (ID == null)
                 ID = Base64Encode((Guid.NewGuid().ToString() + ("-" + Name + "-" + this.GetHashCode())));
+            else
+                throw new MMCException("cannot finalize after ID is set.");
+            return ID;
         }
         public static string Base64Decode(string base64EncodedData)
         {
@@ -57,6 +60,7 @@ namespace MMC
             return System.Convert.ToBase64String(plainTextBytes);
         }
     }
+
     public enum ReturnStatus
     {
         OK,

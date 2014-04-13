@@ -14,12 +14,12 @@ namespace MMC
     {
         public MMCPeerConfig pConfig { get; set; }
         public HashSet<ClientValue> DiscoveredClients { get; set; }
-        private Action UserCallback;
+        private Action<NetIncomingMessage> UserCallback;
         public MMCPeer(MMCPeerConfig config) : base (config.npConfig)
         {
             DiscoveredClients = new HashSet<ClientValue>();
             pConfig = config;
-            base.RegisterReceivedCallback(new SendOrPostCallback(MessageCallback));
+            RegisterReceivedCallback(new SendOrPostCallback(MessageCallback));
         }
         public void Discover(int port)
         {
@@ -49,17 +49,17 @@ namespace MMC
             }
             DiscoveredClients.Add(new ClientValue(message.SenderEndPoint, id));
         }
-        public void RegisterCallback(Action callback)
+        public void RegisterCallback(Action<NetIncomingMessage> callback)
         {
             UserCallback = callback;
         }
         private void MessageCallback(object peer)
         {
-            if(UserCallback == null)
+            NetIncomingMessage msg = this.ReadMessage();
+            if (UserCallback == null)
                 throw new NotImplementedException();
             else
-                UserCallback();
-            NetIncomingMessage msg = this.ReadMessage();
+                UserCallback(msg);
             switch (msg.MessageType)
             {
                 case NetIncomingMessageType.DiscoveryResponse:

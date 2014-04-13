@@ -39,17 +39,35 @@ namespace MMC_Client
             // Enable DiscoveryResponse messages
             config.EnableMessageType(NetIncomingMessageType.DiscoveryResponse);
             config.EnableMessageType(NetIncomingMessageType.DiscoveryRequest);
+            config.AcceptIncomingConnections = true;
 
             MMCPeerConfig pConfig = new MMCPeerConfig(config, PeerType.CHARACTER, "Peer2");
 
             s_server = new MMCPeer(pConfig);
             Output("listening on " + config.Port.ToString());
-            s_server.RegisterCallback(new Action(GotMessage));
+            s_server.RegisterCallback(new Action<NetIncomingMessage>(GotMessage));
             s_server.Start();
         }
 
-        public void GotMessage()
+        public void GotMessage(NetIncomingMessage msg)
         {
+            //NetIncomingMessage msg = s_server.ReadMessage();
+            if (msg == null)
+                return;
+            switch (msg.MessageType)
+            {
+                case NetIncomingMessageType.VerboseDebugMessage:
+                case NetIncomingMessageType.WarningMessage:
+                    string text = msg.ReadString();
+                    Output(text);
+                   break;
+                case NetIncomingMessageType.StatusChanged:
+                   NetConnectionStatus status = (NetConnectionStatus)msg.ReadByte();
+                   string reason = msg.ReadString();
+                   Output(NetUtility.ToHexString(msg.SenderConnection.RemoteUniqueIdentifier) + " " + status + ": " + reason);
+
+                   break;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
