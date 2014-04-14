@@ -35,6 +35,10 @@
     <Reference Include="Lidgren.Network">
       <HintPath>..\..\..\Libs\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SamplesCommon">
       <HintPath>..\..\..\Libs\SamplesCommon.dll</HintPath>
     </Reference>
@@ -71,6 +75,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -85,6 +90,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\MDXLib\MDXLib.csproj">
+      <Project>{3bf0f936-fc7d-48b4-b24a-daa828458dc3}</Project>
+      <Name>MDXLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MMCLib\MMCLib.csproj">
       <Project>{a33faa8a-84f5-4bbb-abe9-faa3234089c0}</Project>
       <Name>MMCLib</Name>

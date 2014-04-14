@@ -13,17 +13,21 @@ using System.Net;
 using Lidgren.Network;
 using SamplesCommon;
 using MMC;
+using MDXLib.API;
+using MDXLib.data;
+using Newtonsoft.Json;
 
 namespace MMC_Client
 {
     public partial class Form1 : Form
     {
         private static MMCPeer s_server;
-
+        private static MDXParser parser;
         public Form1()
         {
             InitializeComponent();
-
+            comboBox1.SelectedIndex = 0;
+            parser = new MDXParser("api");
         }
 
         private void Output(string text)
@@ -67,7 +71,13 @@ namespace MMC_Client
                    Output(NetUtility.ToHexString(msg.SenderConnection.RemoteUniqueIdentifier) + " " + status + ": " + reason);
                    break;
                 case NetIncomingMessageType.Data:
-                   Output(msg.ReadString());
+                   MMCMessage message = JsonConvert.DeserializeObject<MMCMessage>(msg.ReadString());
+                   if (message.Type.Contains(DataType.CHARACTER))
+                   {
+                       MMCCharacter character = message.CharacterData;
+                       MDXFile model = parser.GetFile(character.ModelAPI);
+                       pictureBox1.Load(model.GetPreview().ToString());
+                   }
                    break;
             }
         }

@@ -123,7 +123,7 @@ namespace MMC_Server
         {
             MMCMessage message = new MMCMessage();
             MMCCharacter character = new MMCCharacter();
-            character.ModelAPI = "53325ac36de9a";
+            character.ModelAPI = textBox1.Text;
             character.MotionAPI = "532ed403672d3";
             character.Name = "Racing Miku";
             character.UseClientModel = false;
