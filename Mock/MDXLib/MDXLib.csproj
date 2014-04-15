@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MDXData.cs" />
+    <Compile Include="MDXFileUtil.cs" />
     <Compile Include="MDXParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

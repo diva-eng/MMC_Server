@@ -14,7 +14,7 @@ using Lidgren.Network;
 using SamplesCommon;
 using MMC;
 using MDXLib.API;
-using MDXLib.data;
+using MDXLib.Data;
 using Newtonsoft.Json;
 
 namespace MMC_Client

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-namespace MDXLib.data
+namespace MDXLib.Data
 {
     //Basic Data model for MDX responses
     public class MDXFile

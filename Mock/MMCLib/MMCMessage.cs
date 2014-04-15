@@ -97,6 +97,9 @@ namespace MMC
         //Util
         CALIB,
         LOCK,
-        UNLOCK
+        UNLOCK,
+        //Send recieve
+        BEGIN_SEND,
+        END_SEND
     }
 }

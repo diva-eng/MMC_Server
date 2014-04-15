@@ -71,6 +71,7 @@ namespace MMC
         }
         private void MessageCallback(object peer)
         {
+            //Pass the message to user defined method first then run defined functions
             NetIncomingMessage msg = this.ReadMessage();
             if (UserCallback == null)
                 throw new NotImplementedException();

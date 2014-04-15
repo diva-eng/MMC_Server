@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System.Net.Http;
 
-using MDXLib.data;
+using MDXLib.Data;
 using Newtonsoft.Json;
 
 namespace MDXLib.API
