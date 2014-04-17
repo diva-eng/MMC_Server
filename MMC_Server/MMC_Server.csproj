@@ -128,6 +128,7 @@
     <Resource Include="appbar.disk.png" />
     <Resource Include="geometry_%402X.png" />
     <Resource Include="miku.png" />
+    <Resource Include="Overlay.png" />
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>

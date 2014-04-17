@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MMC_Server.MainWindow"
-        Title="Miku Miku Concert Server" Width="1280" Height="720" Icon="miku.png" MinWidth="1280" MinHeight="720"
+        Title="Miku Miku Concert Controller" Width="1280" Height="720" Icon="miku.png" MinWidth="1280" MinHeight="720"
         SnapsToDevicePixels="True">
 <Controls:MetroWindow.Resources>
 <ResourceDictionary>
@@ -27,6 +27,9 @@
 	</Controls:FlyoutsControl>
 </Controls:MetroWindow.Flyouts>
 	<Grid>
+		<Grid.Background>
+			<ImageBrush ImageSource="Overlay.png" Stretch="UniformToFill"/>
+		</Grid.Background>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

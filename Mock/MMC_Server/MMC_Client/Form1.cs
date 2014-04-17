@@ -16,6 +16,7 @@ using MMC;
 using MDXLib.API;
 using MDXLib.Data;
 using Newtonsoft.Json;
+using MDXLib.FileUtil;
 
 namespace MMC_Client
 {
@@ -72,11 +73,12 @@ namespace MMC_Client
                    break;
                 case NetIncomingMessageType.Data:
                    MMCMessage message = JsonConvert.DeserializeObject<MMCMessage>(msg.ReadString());
-                   if (message.Type.Contains(DataType.CHARACTER))
+                   if (message.Type.Contains(DataType.CHARACTER) && s_server.pConfig.type == PeerType.CHARACTER)
                    {
                        MMCCharacter character = message.CharacterData;
                        MDXFile model = parser.GetFile(character.ModelAPI);
                        pictureBox1.Load(model.GetPreview().ToString());
+                       MDXFileUtil.UnpackAndGetFilePath(model);
                    }
                    break;
             }
