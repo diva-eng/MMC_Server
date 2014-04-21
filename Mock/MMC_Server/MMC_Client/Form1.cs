@@ -76,9 +76,7 @@ namespace MMC_Client
                    if (message.Type.Contains(DataType.CHARACTER) && s_server.pConfig.type == PeerType.CHARACTER)
                    {
                        MMCCharacter character = message.CharacterData;
-                       MDXFile model = parser.GetFile(character.ModelAPI);
-                       pictureBox1.Load(model.GetPreview().ToString());
-                       MDXFileUtil.UnpackAndGetFilePath(model);
+                       pictureBox1.Load(character.PreviewImage.ToString());
                    }
                    break;
             }

@@ -14,6 +14,7 @@ namespace MMC
     public class MMCPeer : NetPeer
     {
         public MMCPeerConfig pConfig { get; set; }
+        public PeerState pState { get; set; }
         public HashSet<ClientValue> DiscoveredClients { get; set; }
         private Action<NetIncomingMessage> UserCallback;
         public MMCPeer(MMCPeerConfig config) : base (config.npConfig)
@@ -69,14 +70,22 @@ namespace MMC
             }
             return new ClientValue(new IPEndPoint(IPAddress.Parse("0.0.0.0"), 0), new string [] {"UNKNOWN", "CLIENT"});
         }
+        //Should it be a problem, filtering message based on the client's state?
+        private NetIncomingMessage FilterMessage(NetIncomingMessage msg)
+        {
+            return msg;
+        }
         private void MessageCallback(object peer)
         {
             //Pass the message to user defined method first then run defined functions
+            //Filter message based on the mode client is in
             NetIncomingMessage msg = this.ReadMessage();
             if (UserCallback == null)
                 throw new NotImplementedException();
             else
-                UserCallback(msg);
+            {
+                UserCallback(FilterMessage(msg));
+            }
             switch (msg.MessageType)
             {
                 case NetIncomingMessageType.DiscoveryResponse:
@@ -87,6 +96,13 @@ namespace MMC
                     break;
             }
         }
+    }
+    public enum PeerState
+    {
+        LOCK,
+        READY,
+        RECIEVE,
+        COMMAND,
     }
     public enum PeerType
     {
