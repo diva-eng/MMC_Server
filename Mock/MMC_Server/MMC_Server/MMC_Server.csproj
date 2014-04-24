@@ -84,7 +84,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MMCLib\MMCLib.csproj">
+    <ProjectReference Include="..\..\..\MMCLib\MMCLib.csproj">
       <Project>{a33faa8a-84f5-4bbb-abe9-faa3234089c0}</Project>
       <Name>MMCLib</Name>
     </ProjectReference>
