@@ -42,6 +42,7 @@ namespace MMC
         public MMCControl ControlData;
         public MMCSong SongData;
         public MMCCharacter CharacterData;
+        public PeerState StateChange;
     }
     public class MMCControl
     {
@@ -136,7 +137,8 @@ namespace MMC
         BYTE,
         CONTROL,
         SONG,
-        CHARACTER
+        CHARACTER,
+        STATE
     }
     public enum ControlType
     {

@@ -94,6 +94,13 @@ namespace MMC
                 case NetIncomingMessageType.DiscoveryRequest:
                     RespondDiscover(msg);
                     break;
+                case NetIncomingMessageType.Data:
+                    MMCMessage message = JsonConvert.DeserializeObject<MMCMessage>(msg.ReadString());
+                    if (message.Type.Contains(DataType.STATE))
+                    {
+                        this.pState = message.StateChange;
+                    }
+                    break;
             }
         }
     }

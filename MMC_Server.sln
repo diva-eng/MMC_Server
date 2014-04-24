@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC_Server", "MMC_Server\MMC_Server.csproj", "{413E8B76-215A-4D64-B192-7BC3D34D1C39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDXLib", "MDXLib\MDXLib.csproj", "{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMCLib", "MMCLib\MMCLib.csproj", "{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 		{413E8B76-215A-4D64-B192-7BC3D34D1C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{413E8B76-215A-4D64-B192-7BC3D34D1C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{413E8B76-215A-4D64-B192-7BC3D34D1C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF0F936-FC7D-48B4-B24A-DAA828458DC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A33FAA8A-84F5-4BBB-ABE9-FAA3234089C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
