@@ -41,30 +41,18 @@ namespace MMC_Server
             MMCPeerConfig pConfig = new MMCPeerConfig(config, PeerType.CONTROLLER, "Controller1");
 
             s_server = new MMCPeer(pConfig);
-            s_server.RegisterCallback(new Action<NetIncomingMessage>(GotMessage));
+            s_server.RegisterCallback(new Action<MMCMessage>(GotMessage));
             Output("listening on " + config.Port.ToString());
             s_server.Start();
             
 
         }
 
-        public void GotMessage(NetIncomingMessage msg)
+        public void GotMessage(MMCMessage msg)
         {
             //NetIncomingMessage msg = s_server.ReadMessage();
             if (msg == null)
                 return;
-            switch (msg.MessageType)
-            {
-                case NetIncomingMessageType.VerboseDebugMessage:
-                    string text = msg.ReadString();
-                    Output(text);
-                   break;
-                case NetIncomingMessageType.StatusChanged:
-                   NetConnectionStatus status = (NetConnectionStatus)msg.ReadByte();
-                   string reason = msg.ReadString();
-                   Output(NetUtility.ToHexString(msg.SenderConnection.RemoteUniqueIdentifier) + " " + status + ": " + reason);
-                   break;
-            }
         }
 
 
@@ -104,7 +92,7 @@ namespace MMC_Server
             NetOutgoingMessage hail = s_server.CreateMessage("This is the hail message");
             foreach (ClientValue v in s_server.DiscoveredClients)
             {
-                s_server.Connect(v.Key, hail);
+                s_server.Connect(v, hail);
                 Output("Connected " + v.Key.Address + ":" + v.Key.Port + " " + v.Value[1]);
             }
         }
@@ -144,15 +132,11 @@ namespace MMC_Server
             control.BasicControl = BasicControl.LOCK;
             message1.ControlData = control;
             message1.Type = new DataType[] { DataType.CONTROL };
-            
-            
-            foreach (NetConnection c in s_server.Connections)
-            {
-                s_server.SendMessage(message, c);
-                Output("sending to: " + s_server.GetConnectionInfo(c).Value[0] + "@" + s_server.GetConnectionInfo(c).Value[1]);
-                s_server.SendMessage(message1, c);
-                Output("sending to: " + s_server.GetConnectionInfo(c).Value[0] + "@" + s_server.GetConnectionInfo(c).Value[1]);
-            }
+
+            s_server.SendToAll(PeerType.CHARACTER, message);
+            //Output("sending to: " + s_server.GetConnectionInfo(c).Value[0] + "@" + s_server.GetConnectionInfo(c).Value[1]);
+            s_server.SendToAll(PeerType.SFX, message1);
+            //Output("sending to: " + s_server.GetConnectionInfo(c).Value[0] + "@" + s_server.GetConnectionInfo(c).Value[1]);
         }
     }
 }

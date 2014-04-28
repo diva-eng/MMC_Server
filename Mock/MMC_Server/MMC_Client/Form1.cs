@@ -50,35 +50,20 @@ namespace MMC_Client
 
             s_server = new MMCPeer(pConfig);
             Output("listening on " + config.Port.ToString());
-            s_server.RegisterCallback(new Action<NetIncomingMessage>(GotMessage));
+            s_server.RegisterCallback(new Action<MMCMessage>(GotMessage));
             s_server.Start();
         }
 
-        public void GotMessage(NetIncomingMessage msg)
+        public void GotMessage(MMCMessage message)
         {
             //NetIncomingMessage msg = s_server.ReadMessage();
-            if (msg == null)
+            if (message == null)
                 return;
-            switch (msg.MessageType)
+            Output(message.ToString());
+            if (message.Type.Contains(DataType.CHARACTER) && s_server.pConfig.type == PeerType.CHARACTER)
             {
-                case NetIncomingMessageType.VerboseDebugMessage:
-                case NetIncomingMessageType.WarningMessage:
-                    string text = msg.ReadString();
-                    Output(text);
-                   break;
-                case NetIncomingMessageType.StatusChanged:
-                   NetConnectionStatus status = (NetConnectionStatus)msg.ReadByte();
-                   string reason = msg.ReadString();
-                   Output(NetUtility.ToHexString(msg.SenderConnection.RemoteUniqueIdentifier) + " " + status + ": " + reason);
-                   break;
-                case NetIncomingMessageType.Data:
-                   MMCMessage message = JsonConvert.DeserializeObject<MMCMessage>(msg.ReadString());
-                   if (message.Type.Contains(DataType.CHARACTER) && s_server.pConfig.type == PeerType.CHARACTER)
-                   {
-                       MMCCharacter character = message.CharacterData;
-                       pictureBox1.Load(character.PreviewImage.ToString());
-                   }
-                   break;
+                MMCCharacter character = message.CharacterData;
+                pictureBox1.Load(character.PreviewImage.ToString());
             }
         }
 

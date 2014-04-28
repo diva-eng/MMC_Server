@@ -16,16 +16,57 @@ namespace MMC
         public MMCPeerConfig pConfig { get; set; }
         public PeerState pState { get; set; }
         public HashSet<ClientValue> DiscoveredClients { get; set; }
-        private Action<NetIncomingMessage> UserCallback;
+        public HashSet<KeyValuePair<ClientValue, NetConnection>> ConnectedClients { get; set; }
+        private Action<MMCMessage> UserCallback;
         public MMCPeer(MMCPeerConfig config) : base (config.npConfig)
         {
             DiscoveredClients = new HashSet<ClientValue>();
+            ConnectedClients = new HashSet<KeyValuePair<ClientValue, NetConnection>>();
             pConfig = config;
             RegisterReceivedCallback(new SendOrPostCallback(MessageCallback));
         }
         public void Discover(int port)
         {
             this.DiscoverLocalPeers(port);
+        }
+        public NetConnection Connect(ClientValue remoteEndPoint, NetOutgoingMessage hailMessage)
+        {
+            NetConnection connection = null;
+            try
+            {
+                connection = base.Connect(remoteEndPoint.Key, hailMessage);
+                ConnectedClients.Add(new KeyValuePair<ClientValue, NetConnection>(remoteEndPoint, connection));
+            }
+            catch (Exception e)
+            {
+                //If exception is raised no insert
+            }
+            return connection;
+        }
+        public void SendToAll(PeerType type, MMCMessage message)
+        {
+            foreach (KeyValuePair<ClientValue, NetConnection> kv in this.ConnectedClients)
+            {
+                if (kv.Key.Value[0] == type.ToString())
+                    this.SendMessage(message, kv.Value);
+            }
+        }
+        public void SendToClient(ClientValue cv, MMCMessage message)
+        {
+            foreach (KeyValuePair<ClientValue, NetConnection> kv in this.ConnectedClients)
+            {
+                if (kv.Key.Equals(cv))
+                    this.SendMessage(message, kv.Value);
+            }
+        }
+        public NetConnection GetClient(ClientValue cv)
+        {
+            foreach (KeyValuePair<ClientValue, NetConnection> kv in this.ConnectedClients)
+            {
+                if (kv.Key.Equals(cv))
+                    return kv.Value;
+            }
+            return null;
         }
         public void RespondDiscover(NetIncomingMessage message)
         {
@@ -51,7 +92,7 @@ namespace MMC
             }
             DiscoveredClients.Add(new ClientValue(message.SenderEndPoint, id));
         }
-        public void RegisterCallback(Action<NetIncomingMessage> callback)
+        public void RegisterCallback(Action<MMCMessage> callback)
         {
             UserCallback = callback;
         }
@@ -71,7 +112,7 @@ namespace MMC
             return new ClientValue(new IPEndPoint(IPAddress.Parse("0.0.0.0"), 0), new string [] {"UNKNOWN", "CLIENT"});
         }
         //Should it be a problem, filtering message based on the client's state?
-        private NetIncomingMessage FilterMessage(NetIncomingMessage msg)
+        private MMCMessage FilterMessage(MMCMessage msg)
         {
             return msg;
         }
@@ -80,12 +121,7 @@ namespace MMC
             //Pass the message to user defined method first then run defined functions
             //Filter message based on the mode client is in
             NetIncomingMessage msg = this.ReadMessage();
-            if (UserCallback == null)
-                throw new NotImplementedException();
-            else
-            {
-                UserCallback(FilterMessage(msg));
-            }
+            MMCMessage message = null;
             switch (msg.MessageType)
             {
                 case NetIncomingMessageType.DiscoveryResponse:
@@ -95,12 +131,18 @@ namespace MMC
                     RespondDiscover(msg);
                     break;
                 case NetIncomingMessageType.Data:
-                    MMCMessage message = JsonConvert.DeserializeObject<MMCMessage>(msg.ReadString());
+                    message = JsonConvert.DeserializeObject<MMCMessage>(msg.ReadString());
                     if (message.Type.Contains(DataType.STATE))
                     {
                         this.pState = message.StateChange;
                     }
                     break;
+            }
+            if (UserCallback == null)
+                throw new NotImplementedException();
+            else
+            {
+                UserCallback(FilterMessage(message));
             }
         }
     }

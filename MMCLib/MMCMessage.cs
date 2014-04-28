@@ -43,6 +43,10 @@ namespace MMC
         public MMCSong SongData;
         public MMCCharacter CharacterData;
         public PeerState StateChange;
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
     public class MMCControl
     {
