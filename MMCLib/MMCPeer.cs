@@ -16,12 +16,12 @@ namespace MMC
         public MMCPeerConfig pConfig { get; set; }
         public PeerState pState { get; set; }
         public HashSet<ClientValue> DiscoveredClients { get; set; }
-        public HashSet<KeyValuePair<ClientValue, NetConnection>> ConnectedClients { get; set; }
+        public List<KeyValuePair<ClientValue, NetConnection>> ConnectedClients { get; set; }
         private Action<MMCMessage> UserCallback;
         public MMCPeer(MMCPeerConfig config) : base (config.npConfig)
         {
             DiscoveredClients = new HashSet<ClientValue>();
-            ConnectedClients = new HashSet<KeyValuePair<ClientValue, NetConnection>>();
+            ConnectedClients = new List<KeyValuePair<ClientValue, NetConnection>>();
             pConfig = config;
             RegisterReceivedCallback(new SendOrPostCallback(MessageCallback));
         }
